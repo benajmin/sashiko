@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.11
 
 import tkinter as tk
+import functools
 
 STITCH_LENGTH = 10
 OFFSET = 10
@@ -35,6 +36,22 @@ def hitomezashi_strings(x, y):
         return ''.join(char_to_binary(c) for c in s)
 
     hitomezashi(string_to_binary(x), string_to_binary(y))
+
+@functools.cache
+def pell(n):
+    if n == 0:
+        return ""
+    if n == 1:
+        return "1"
+
+    def bitflip(s):
+        return "".join(["1" if x == "0" else "0" for x in s])
+
+    return bitflip(pell(n-1)) + bitflip(pell(n-2))[::-1] + pell(n-1)
+
+def fibonacci_snowflake(n):
+    x = pell(n) + pell(n)[::-1]
+    hitomezashi(x, x)
 
 def main():
     # hitomezashi([1,0,1,0,0,1,0,1]*10, [1,0,0]*20)
