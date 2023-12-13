@@ -26,6 +26,16 @@ def hitomezashi(rows, cols):
 def hitomezashi_ints(x, y):
     hitomezashi(f"{x:b}"*10, f"{y:b}"*10)
 
+def hitomezashi_strings(x, y):
+    def char_to_binary(c):
+        x = ord(c.lower()) - ord('a')
+        return f"{x:05b}"
+
+    def string_to_binary(s):
+        return ''.join(char_to_binary(c) for c in s)
+
+    hitomezashi(string_to_binary(x), string_to_binary(y))
+
 def main():
     # hitomezashi([1,0,1,0,0,1,0,1]*10, [1,0,0]*20)
     hitomezashi_ints(4, 150)
