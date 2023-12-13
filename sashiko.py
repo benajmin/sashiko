@@ -13,13 +13,13 @@ def stitch(canva, start, num_stitches, coord):
 
 def hitomezashi(rows, cols):
     window = tk.Tk()
-    canva = tk.Canvas(window, width=STITCH_LENGTH*(len(cols)+2), height=STITCH_LENGTH*(len(rows)+2))
+    canva = tk.Canvas(window, width=STITCH_LENGTH*(len(cols)+1), height=STITCH_LENGTH*(len(rows)+1))
 
     for i, row in enumerate(rows):
-        stitch(canva, row, len(cols), lambda x: (OFFSET + x*STITCH_LENGTH, OFFSET+i*STITCH_LENGTH))
+        stitch(canva, row, len(cols) - 1, lambda x: (OFFSET + x*STITCH_LENGTH, OFFSET+i*STITCH_LENGTH))
 
     for i, col in enumerate(cols):
-        stitch(canva, col, len(rows), lambda y: (OFFSET + i*STITCH_LENGTH, OFFSET+y*STITCH_LENGTH))
+        stitch(canva, col, len(rows) - 1, lambda y: (OFFSET + i*STITCH_LENGTH, OFFSET+y*STITCH_LENGTH))
 
     canva.pack()
     window.mainloop()
